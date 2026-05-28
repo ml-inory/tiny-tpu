@@ -11,6 +11,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 RTL = REPO_ROOT / "rtl" / "pe.sv"
+FIXEDPOINT = REPO_ROOT / "rtl" / "fixedpoint.sv"
 TB = REPO_ROOT / "tb" / "pe_tb.sv"
 BUILD_DIR = REPO_ROOT / "tb" / "build"
 
@@ -41,10 +42,12 @@ def main() -> None:
         "iverilog",
         "-g2012",
         "-Wall",
+        "-Wno-timescale",
         "-s",
         "pe_tb",
         "-o",
         str(out),
+        str(FIXEDPOINT),
         str(RTL),
         str(TB),
     ]
